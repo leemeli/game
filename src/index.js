@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import App from './App';
+import Main from './Main';
+import SignUpApp from './SignUpApp';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-import '../css/bootstrap.css';
-import '../css/simple-sidebar.css';
+import '../css/main.css';
+
 
 // Initialize Firebase
  var config = {
@@ -21,6 +23,9 @@ import '../css/simple-sidebar.css';
   ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
+        <IndexRoute component={Main} />
+        <Route path="main" component={Main} />
+        <Route path="signup" component={SignUpApp} />
     </Route>
   </Router>,
   document.getElementById('root')

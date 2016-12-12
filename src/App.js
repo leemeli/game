@@ -5,9 +5,9 @@ class App extends React.Component {
   //how to display this component
   render() {
     return (
-      <div>
-        <div>{this.props.children} Hello</div>
-      </div>
+        <div>
+          {this.props.children}
+        </div>
     );
   }
 }
