@@ -1,7 +1,8 @@
 import React from 'react';
-import SignInApp from './SignInApp';
 import { Link } from 'react-router';
 import firebase from 'firebase';
+import Leaderboard from './Leaderboard';
+import SignInApp from './SignInApp';
 
 export default class Nav extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ export default class Nav extends React.Component {
     render() {
 
       var name = this.props.name;
+      var points = this.props.points;
 
       return (
           <div id="sidebar">
@@ -36,11 +38,38 @@ export default class Nav extends React.Component {
                 </div>
                 }
                 {name !== '' &&
-                <div>
+                <div className="centerText">
                     <h5>Welcome, {name}!</h5>
                     <p>
                         <strong>Points: </strong> {this.props.points}
                     </p>
+                    {points >= 0 &&
+                    <p>
+                        <strong>Rank: </strong> Noob
+                    </p>
+                    }
+                    {points >= 50 &&
+                    <p>
+                        <strong>Rank: </strong> Wannabe Gamer
+                    </p>
+                    }
+                    {points >= 150 &&
+                    <p>
+                        <strong>Rank: </strong> Typical Gamer
+                    </p>
+                    }
+                    {points >= 250 &&
+                    <p>
+                        <strong>Rank: </strong> Addicted Gamer
+                    </p>
+                    }
+                    {points >= 400 &&
+                    <p>
+                        <strong>Rank: </strong> Pro Gamer
+                    </p>
+                    }
+                    <hr />
+                    <Leaderboard />
                     <div className="logout">
                         <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={() => this.signOut()}>Sign out</button>
                     </div>

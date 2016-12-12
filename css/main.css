@@ -21,19 +21,66 @@
     margin-bottom: 20px;
 }
 
-#sign-in-form-section input {
-    width: 220px;
+.mdl-textfield__input {
+    margin: 0 auto;
+}
+
+h5 {
+    font-size: 18px;
 }
 
 .fa {
     font-size: 50px;
 }
 
-@media (min-width: 1024px) {
+#sidebar {
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background-color: #308A88;
+    text-align: center;
+}
+
+ul {
+    text-align: center;
+}
+
+main {
+    position: absolute;
+    left: 0;
+    top: 430px;
+    margin: 10px;
+}
+
+hr {
+    margin: 0 auto;
+    width: 50%;
+}
+
+@media (min-width: 874px) {
     #signUpDiv{
         position: absolute;
         left: 300px;
         margin: 0px;
+    }
+    #sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 210px;
+        height: 100%;
+        text-align: center;
+        padding: 0px 20px 0px 20px;
+        padding-top: 50px;
+    }
+    main {
+        top: 0;
+        position: absolute;
+        left: 250px;
+        margin: 30px;
     }
 }
 
@@ -43,20 +90,17 @@
     margin: 0;
 }
 
-#sidebar {
-    position: absolute;
-    background-color: beige;
-    top: 0;
-    left: 0;
-    width: 210px;
-    height: 100%;
+.sign-in-form {
     text-align: center;
-    padding: 20px;
-    padding-top: 50px;
 }
 
-main {
-    position: absolute;
-    left: 250px;
-    margin: 30px;
+.list-item {
+  width: 210px;
+  text-align: center;
+  display: inline-block;
+  margin: 0;
+}
+
+.centerText {
+    text-align: center;
 }
