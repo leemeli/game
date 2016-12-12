@@ -135,8 +135,9 @@ class ValidatedInput extends React.Component {
     return (
       <div className={"form-group " + this.props.errors.style}>
         <div className="mdl-textfield mdl-js-textfield">
-            <input id={this.props.field} type={this.props.type} name={this.props.field} className="mdl-textfield__input" onChange={this.props.changeCallback} />
             <label htmlFor={this.props.field} className="mdl-textfield__label">{this.props.label}</label>
+            <br />
+            <input id={this.props.field} type={this.props.type} name={this.props.field} className="mdl-textfield__input" onChange={this.props.changeCallback} />
         </div>
         <ValidationErrors errors={this.props.errors} />
       </div>

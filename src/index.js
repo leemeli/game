@@ -6,8 +6,9 @@ import Main from './Main';
 import SignUpApp from './SignUpApp';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
+import 'react-mdl/extra/css/material.green-orange.min.css';
+import 'react-mdl/extra/material.min.js';
 import '../css/main.css';
-
 
 // Initialize Firebase
  var config = {
