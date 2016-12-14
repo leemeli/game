@@ -15,6 +15,7 @@ export default class Main extends React.Component {
         this.updateState = this.updateState.bind(this);
         this.componentWillMount = this.componentWillMount.bind(this);
         this.losePoints = this.losePoints.bind(this);
+        this.gainPoints = this.gainPoints.bind(this);
     }
 
     updateState(stateChange) {
@@ -67,7 +68,15 @@ export default class Main extends React.Component {
 
     losePoints(){
         var user = firebase.auth().currentUser;
-        var newPoints = this.state.points - 2.0;
+        var newPoints = this.state.points - 2;
+        this.setState({points: newPoints});
+        var userpointsRef = firebase.database().ref('users/' + user.uid + '/points');
+        userpointsRef.set(newPoints);
+    }
+    
+    gainPoints(){
+         var user = firebase.auth().currentUser;
+        var newPoints = this.state.points + 3;
         this.setState({points: newPoints});
         var userpointsRef = firebase.database().ref('users/' + user.uid + '/points');
         userpointsRef.set(newPoints);
@@ -88,13 +97,10 @@ export default class Main extends React.Component {
             <Nav  updateParent={this.updateState} points={this.state.points} name={this.state.name}/>
             <main>
                 <h1>Test Your Knowledge</h1>
-                {this.state.name !== '' &&
-                <p>Earn points by guessing game titles correctly!</p>
-                }
                 {this.state.name === '' &&
-                <p>Login or signup to start earning points by guessing game titles!</p>
+                <p>Login or signup to start earning points!</p>
                 }
-                <Trivia losePoints={this.losePoints} userName={this.state.name}/>
+                <Trivia losePoints={this.losePoints} gainPoints={this.gainPoints} userName={this.state.name}/>
             </main>
         </div>
       );

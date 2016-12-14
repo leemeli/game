@@ -91,6 +91,7 @@ export default class Trivia extends React.Component {
                 currentGame = randomGame[0];
             }
             that.setState({currentData: currentGame, otherGame1: randomGame[1], otherGame2: randomGame[2]});
+            console.log("promise done");
         });
     }
 
@@ -102,7 +103,7 @@ export default class Trivia extends React.Component {
                     <p>Loading...</p>
                 }
                 {this.state.currentData &&
-                <GameCard data={this.state.currentData} game2={this.state.otherGame1} game3={this.state.otherGame2} newPrompt={this.generateNewPrompt} losePoints={this.props.losePoints} userName={this.props.userName}/>
+                <GameCard data={this.state.currentData} game2={this.state.otherGame1} game3={this.state.otherGame2} newPrompt={this.generateNewPrompt} gainPoints={this.props.gainPoints} losePoints={this.props.losePoints} userName={this.props.userName}/>
                 }
             </div>
             

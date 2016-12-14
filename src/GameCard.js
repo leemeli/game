@@ -14,7 +14,8 @@ export default class GameCard extends React.Component {
         super(props);
         this.state =  {
             games: [],
-            guessed: false
+            guessed: false,
+            correct: false
         };
         this.showAnswer = this.showAnswer.bind(this);
         this.resetGuess = this.resetGuess.bind(this);
@@ -24,8 +25,8 @@ export default class GameCard extends React.Component {
     backgroundUrl(array, fn){
         var result = [];
         for (var i = 0; i < array.length; i ++){
-        var mapping = fn(array[i]);
-        result = result.concat(mapping);
+            var mapping = fn(array[i]);
+            result = result.concat(mapping);
         }
         return result;
     }
@@ -34,20 +35,29 @@ export default class GameCard extends React.Component {
         this.setState({guessed: true});
     }
 
-    resetGuess(){
+    resetGuess(curGame){
+        var prevGame = curGame;
         var that = this;
-        setTimeout(function() {
-            that.setState({guessed: false});
-        }, 2000);
+        if (this.props.data["name"].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/gi,"") == prevGame){
+            setTimeout(function(){
+                that.resetGuess(prevGame);
+            },100);
+        }
+        else {
+            this.setState({guessed: false, correct: false});
+        }
     }
 
     userGuess(guessName){
         var correct = this.props.data["name"];
-        if (guessName === correct){
-            console.log("correct!");
+        correct = correct.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/gi,"");
+        if (guessName == correct){ // user guessed correctly
+            this.setState({guessed: true, correct: true});
+            this.props.gainPoints();
         }
-        else {
-            console.log("wrong!");
+        else { // user guessed incorrectly
+            this.setState({guessed: true, yourGuess: guessName});
+            this.props.losePoints();
         }
     }
 
@@ -66,7 +76,7 @@ export default class GameCard extends React.Component {
             backResult.pop();
             backResult = backResult.join("");
             var cardStyle = {
-            background: backResult,
+                background: backResult,
             }
         }
         else {
@@ -83,9 +93,9 @@ export default class GameCard extends React.Component {
         if (defaultSummary){
             filteredSummary = defaultSummary.replace(name, "*****");
             for (var i = 0; i < wordToFilter.length; i ++){
-                if (wordToFilter[i].length > 3 || !isNaN(wordToFilter[i])){
+                //if (wordToFilter[i].length > 3 || !isNaN(wordToFilter[i])){
                     filteredSummary = filteredSummary.replaceAll(wordToFilter[i], "*****");
-                }
+                //}
             }
             if (filteredSummary.length > 350){
                 filteredSummary = filteredSummary.substring(0, 350)+"...";
@@ -130,8 +140,32 @@ export default class GameCard extends React.Component {
                 }
                 {this.state.guessed &&
                     <div>
-                        <h3><strong>Answer:</strong> {name}</h3>
-                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={(e) => {this.props.newPrompt(); this.resetGuess()}}>
+                        <h4><strong>Answer:</strong> {name}</h4>
+                        {this.state.correct &&
+                            <div>
+                                {this.props.userName !== '' &&
+                                    <p className="correct">Correct! You gained 3 points.</p>
+                                }
+                                {this.props.userName === '' &&
+                                    <p className="correct">Correct! Great job!</p>
+                                }
+                            </div>
+                        }
+                        {!this.state.correct &&
+                            <div>
+                                <p><strong>Your guess:</strong> {this.state.yourGuess}</p>
+                                <div>
+                                    {this.props.userName !== '' &&
+                                        <p className="wrong">Incorrect. You lost 2 points.</p>
+                                    }
+                                    {this.props.userName === '' &&
+                                        <p className="wrong">Incorrect. Try again!</p>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <p>You can learn more about {name} <a href={this.props.data["url"]} target="_blank">here!</a></p>
+                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={(e) => {this.resetGuess(name); this.props.newPrompt()}}>
                             Challenge me again!
                         </button>
                     </div>

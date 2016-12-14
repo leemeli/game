@@ -132,3 +132,11 @@ hr {
         margin: 0;
     }
 }
+
+.wrong{
+    color: red;
+}
+
+.correct{
+    color: green;
+}
