@@ -38,10 +38,11 @@ export default class GameCard extends React.Component {
     resetGuess(curGame){
         var prevGame = curGame;
         var that = this;
+        // Make it check if the new data has loaded yet. If not, wait 100 milliseconds and try again
         if (this.props.data["name"].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/gi,"") == prevGame){
             setTimeout(function(){
                 that.resetGuess(prevGame);
-            },100);
+            },10);
         }
         else {
             this.setState({guessed: false, correct: false});

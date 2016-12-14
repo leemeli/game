@@ -1,6 +1,6 @@
 import React from 'react';
 // import firebase from 'firebase';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 export default class SignUpForm extends React.Component {
   constructor(props) {
@@ -118,6 +118,7 @@ export default class SignUpForm extends React.Component {
 
 
           <div className="form-group sign-up-buttons">
+            <button className="mdl-button mdl-js-button mdl-button--raised"><Link to="/main" className="backBtn">GO BACK</Link></button>
             <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</button>
           </div>
         </form>

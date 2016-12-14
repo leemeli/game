@@ -110,10 +110,10 @@ export default class SignUpApp extends React.Component {
                 {name === '' &&
                 <SignUpForm signUpCallback={this.signUp} />
                 }
+                {name !== '' &&
+                    <p className="topSpace">You already have an account!</p>
+                }
             </section>
-            {name !== '' &&
-                <p>You already have an account!</p>
-            }
         </main>
     </div>
       );

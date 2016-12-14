@@ -140,3 +140,13 @@ hr {
 .correct{
     color: green;
 }
+
+.backBtn {
+    color: black;
+    text-decoration: none;
+}
+
+.topSpace {
+    margin-top: 50px;
+    text-align: center;
+}
