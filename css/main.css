@@ -33,14 +33,23 @@ ul {
 
 main {
     position: absolute;
-    left: 0;
+    display: block;
     top: 480px;
-    margin: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 hr {
     margin: 0 auto;
     width: 50%;
+}
+
+.leaderBoard {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .incorrectLogin {
@@ -56,17 +65,30 @@ hr {
         position: fixed;
         top: 0;
         left: 0;
-        width: 210px;
+        width: 270px;
         height: 100%;
         text-align: center;
-        padding: 0px 20px 0px 20px;
+        padding: 0px 10px 0px 10px;
         padding-top: 50px;
     }
     main {
         top: 0;
         position: absolute;
-        left: 250px;
-        margin: 30px;
+        left: 310px;
+        margin-left: 50px;
+        width: auto;
+    }
+}
+
+@media (min-width: 1000px) {
+    main {
+        left: 400px;
+    }
+}
+
+@media (min-width: 1300px) {
+    main {
+        left: 500px;
     }
 }
 
@@ -81,7 +103,7 @@ hr {
 }
 
 .list-item {
-  width: 210px;
+  width: 250px;
   text-align: center;
   display: inline-block;
   margin: 0;
@@ -89,4 +111,24 @@ hr {
 
 .centerText {
     text-align: center;
+}
+
+.demo-card-wide.mdl-card {
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+@media (min-width: 874px) {
+    .demo-card-wide.mdl-card {
+        width: 512px;
+        margin: 0;
+    }
 }

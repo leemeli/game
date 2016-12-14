@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import firebase from 'firebase';
 import { hashHistory } from 'react-router';
+import Trivia from './Trivia';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Main extends React.Component {
         };
         this.updateState = this.updateState.bind(this);
         this.componentWillMount = this.componentWillMount.bind(this);
+        this.losePoints = this.losePoints.bind(this);
     }
 
     updateState(stateChange) {
@@ -52,7 +54,7 @@ export default class Main extends React.Component {
 
                                         that.setState(
                                             {
-                                                points: (pointsVal).toFixed(2),
+                                                points: (pointsVal),
                                             }
                                         );
                                     });
@@ -61,6 +63,14 @@ export default class Main extends React.Component {
                 } 
             }
         );
+    }
+
+    losePoints(){
+        var user = firebase.auth().currentUser;
+        var newPoints = this.state.points - 2.0;
+        this.setState({points: newPoints});
+        var userpointsRef = firebase.database().ref('users/' + user.uid + '/points');
+        userpointsRef.set(newPoints);
     }
 
       componentWillUnmount() {
@@ -77,9 +87,14 @@ export default class Main extends React.Component {
         <div>
             <Nav  updateParent={this.updateState} points={this.state.points} name={this.state.name}/>
             <main>
-                    <h1>True Gamer Test</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                <h1>Test Your Knowledge</h1>
+                {this.state.name !== '' &&
+                <p>Earn points by guessing game titles correctly!</p>
+                }
+                {this.state.name === '' &&
+                <p>Login or signup to start earning points by guessing game titles!</p>
+                }
+                <Trivia losePoints={this.losePoints} userName={this.state.name}/>
             </main>
         </div>
       );

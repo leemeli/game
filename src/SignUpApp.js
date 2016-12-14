@@ -49,7 +49,7 @@ export default class SignUpApp extends React.Component {
 
                                         that.setState(
                                             {
-                                                points: (pointsVal).toFixed(2),
+                                                points: pointsVal,
                                             }
                                         );
                                     });

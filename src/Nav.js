@@ -43,6 +43,11 @@ export default class Nav extends React.Component {
                     <p>
                         <strong>Points: </strong> {this.props.points}
                     </p>
+                    {points < 0 && 
+                    <p>
+                        <strong>Rank: </strong> Can u not
+                    </p>
+                    }
                     {points >= 0 && points < 50 &&
                     <p>
                         <strong>Rank: </strong> Noob
